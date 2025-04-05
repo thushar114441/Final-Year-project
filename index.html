@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustTree</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+    }
+    .video-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+    }
+    .hero-section {
+        color: rgb(5, 122, 248);
+        padding: 100px 0;
+        position: relative;
+        z-index: 1;
+    }
+    .navbar {
+        backdrop-filter: blur(30px);
+        box-shadow: 0px 0px 30px rgba(242, 242, 246, 0);
+        border: 2px solid rgba(246, 35, 35, 0.18);
+        position: relative;
+        z-index: 1;
+        transition: background-color 0.3s, box-shadow 0.3s;
+    }
+    .navbar:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .navbar-nav .nav-link {
+        transition: color 0.3s;
+    }
+    .navbar-nav .nav-link:hover {
+        color: #f62323;
+    }
+    .features-section {
+        padding: 60px 0;
+        background: linear-gradient(135deg, #f9f9f9 0%, #e0e0e0 100%);
+        position: relative;
+        z-index: 1;
+    }
+    .feature-card {
+        padding: 20px;
+        margin: 15px 0;
+        transition: transform 0.3s, box-shadow 0.3s;
+        background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+        border-radius: 10px;
+        position: relative;
+        z-index: 1;
+    }
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    .auth-form {
+        max-width: 400px;
+        margin: 40px auto;
+        padding: 20px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s;
+        position: relative;
+        z-index: 1;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    .auth-form:hover {
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+</style>
+</head>
+<body>
+    <video class="video-bg" autoplay muted loop>
+        <source src="starry-night-sky-under-the-moon-moewalls-com.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">TrustTree</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadContent('about')">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadContent('contact')">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadContent('privacy')">Privacy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadContent('login')">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<!-- Main Content Container -->
+<div id="mainContent">
+    <!-- Landing Page Content -->
+    <div id="landingPage">
+        <section class="hero-section text-center">
+            <div class="container">
+                <h1>Welcome To TrustTree</h1>
+                <p class="lead">Connect, Support, and Empower Your Community</p>
+                <button class="btn btn-primary btn-lg" onclick="loadContent('login')">Get Started</button>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <div class="container">
+                <h2 class="text-center mb-5">Our Features</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="feature-card text-center">
+                            <h3>Help Requests</h3>
+                            <p>Post and respond to community help requests</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-card text-center" image="thu.jpg">
+                            <h3>Buy & Sell</h3>
+                            <p>Exchange items within your community</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-card text-center">
+                            <h3>Emergency Assistance</h3>
+                            <p>Quick response system for urgent needs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Login Form -->
+    <div id="loginForm" style="display: none;">
+        <div class="container">
+            <div class="auth-form">
+                <h2 class="text-center mb-4">Login</h2>
+                <form onsubmit="handleLogin(event)">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                </form>
+                <p class="text-center mt-3">
+                    Don't have an account? 
+                    <a href="#" onclick="loadContent('register')">Register here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Form -->
+    <div id="registerForm" style="display: none;">
+        <div class="container">
+            <div class="auth-form">
+                <h2 class="text-center mb-4">Register</h2>
+                <form onsubmit="handleRegistration(event)">
+                    <div class="mb-3">
+                        <label for="regName" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="regName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="regEmail" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="regEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="regPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="regPassword" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Register</button>
+                </form>
+                <p class="text-center mt-3">
+                    Already have an account? 
+                    <a href="#" onclick="loadContent('login')">Login here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+<script>
+function loadContent(page) {
+    // Hide all content sections
+    document.getElementById('landingPage').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('registerForm').style.display = 'none';
+
+    // Show requested content
+    switch(page) {
+        case 'login':
+            document.getElementById('loginForm').style.display = 'block';
+            break;
+        case 'register':
+            document.getElementById('registerForm').style.display = 'block';
+            break;
+        case 'about':
+            // Redirect to about page
+            window.location.href = 'about.html';
+            break;
+        case 'contact':
+            window.location.href = 'contact.html';
+            break;
+        case 'privacy':
+            window.location.href = 'privacy.html';
+            break;
+        default:
+            document.getElementById('landingPage').style.display = 'block';
+    }
+}
+
+function handleLogin(event) {
+    event.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    
+    // Add your login logic here
+    console.log('Login attempt:', { email, password });
+    
+    // Simulate successful login
+    window.location.href = 'dashboard.html';
+}
+
+function handleRegistration(event) {
+    event.preventDefault();
+    const name = document.getElementById('regName').value;
+    const email = document.getElementById('regEmail').value;
+    const password = document.getElementById('regPassword').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return;
+    }
+
+    // Add your registration logic here
+    console.log('Registration:', { name, email, password });
+    
+    // Simulate successful registration
+    window.location.href = 'dashboard.html';
+}
+</script>
+</body>
+</html>

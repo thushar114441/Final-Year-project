@@ -1,0 +1,42 @@
+/* Color Grading Styles */
+body {
+    background-color: #f0f0f0; /* Light gray background */
+    color: #333; /* Dark text for contrast */
+    font-family: Arial, sans-serif; /* Clean font */
+}
+
+header, footer {
+    background-color: #007bff; /* Primary color for header and footer */
+    color: white; /* White text for contrast */
+    padding: 20px;
+    text-align: center;
+}
+
+a {
+    color: #007bff; /* Link color */
+    text-decoration: none; /* Remove underline */
+}
+
+a:hover {
+    color: #0056b3; /* Darker shade on hover */
+}
+
+section {
+    background-color: #ffffff; /* White background for sections */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px;
+    margin: 20px 0; /* Spacing between sections */
+}
+
+button {
+    background-color: #28a745; /* Green button */
+    color: white; /* White text */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838; /* Darker green on hover */
+}

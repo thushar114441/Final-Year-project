@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Offers</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 30px;
+        }
+
+        /* Styling for Offers Section */
+        .offer-card {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .offer-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .offer-card h6 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+        .offer-card p {
+            margin: 5px 0 10px;
+            color: #555;
+            font-size: 14px;
+        }
+        .offer-card small {
+            color: #888;
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            padding: 10px 15px;
+            border-radius: 8px 8px 0 0;
+        }
+        .card-header h5 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .card-header .btn {
+            font-size: 14px;
+            padding: 5px 10px;
+        }
+
+        /* Modal Styling */
+        .modal-header {
+            background-color: #0056b3;
+            color: white;
+        }
+        .modal-title {
+            font-size: 18px;
+        }
+        .btn-primary {
+            background-color: #0056b3;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #004494;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Offers Section -->
+        <div class="card mb-4" id="offers">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">My Offers</h5>
+                <button class="btn btn-primary btn-sm" onclick="showNewOfferModal()">Add Offer</button>
+            </div>
+            <div class="card-body" id="offersList">
+                <!-- Example Offer -->
+                <div class="offer-card">
+                    <div class="d-flex justify-content-between">
+                        <h6>Free Tutoring for Math</h6>
+                        <span class="badge bg-success">Active</span>
+                    </div>
+                    <p class="mb-2">Offering free tutoring sessions for high school math students.</p>
+                    <small class="text-muted">Posted 3 days ago</small>
+                </div>
+                <div class="offer-card">
+                    <div class="d-flex justify-content-between">
+                        <h6>Carpool to Downtown</h6>
+                        <span class="badge bg-warning">Pending</span>
+                    </div>
+                    <p class="mb-2">Offering carpool rides to downtown every weekday morning.</p>
+                    <small class="text-muted">Posted 1 week ago</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- New Offer Modal -->
+        <div class="modal fade" id="newOfferModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Create New Offer</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="newOfferForm">
+                            <div class="mb-3">
+                                <label for="offerTitle" class="form-label">Title</label>
+                                <input type="text" class="form-control" id="offerTitle" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="offerDescription" class="form-label">Description</label>
+                                <textarea class="form-control" id="offerDescription" rows="3" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="offerStatus" class="form-label">Status</label>
+                                <select class="form-select" id="offerStatus" required>
+                                    <option value="active">Active</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="closed">Closed</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" onclick="submitOffer()">Create Offer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showNewOfferModal() {
+            const modal = new bootstrap.Modal(document.getElementById('newOfferModal'));
+            modal.show();
+        }
+
+        function submitOffer() {
+            const title = document.getElementById('offerTitle').value;
+            const description = document.getElementById('offerDescription').value;
+            const status = document.getElementById('offerStatus').value;
+
+            // Add the new offer to the offers list
+            const offersList = document.getElementById('offersList');
+            const newOffer = document.createElement('div');
+            newOffer.classList.add('offer-card');
+            newOffer.innerHTML = `
+                <div class="d-flex justify-content-between">
+                    <h6>${title}</h6>
+                    <span class="badge bg-${status === 'active' ? 'success' : status === 'pending' ? 'warning' : 'secondary'}">${status.charAt(0).toUpperCase() + status.slice(1)}</span>
+                </div>
+                <p class="mb-2">${description}</p>
+                <small class="text-muted">Just now</small>
+            `;
+            offersList.appendChild(newOffer);
+
+            // Close modal and reset form
+            const modal = bootstrap.Modal.getInstance(document.getElementById('newOfferModal'));
+            modal.hide();
+            document.getElementById('newOfferForm').reset();
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
